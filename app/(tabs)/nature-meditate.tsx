@@ -10,10 +10,10 @@ const natureMeditate = () => {
   return (
     <View className="flex-1">
       <AppGradient colors={["#161b2e", "#0a4d4a", "#766e67"]}>
-        <SafeAreaView className="mb-6">
-          <View>
+        <View className="mb-6">
+          <View className="mt-12">
             <Text className="text-gray-200 mb-3 font-bold text-4xl text-left">
-              NatureMeditate
+              Welcome Bacho
             </Text>
             <Text className="text-indigo-100  mb-5 text-xl font-medium">
               Start your meditation practice today
@@ -22,13 +22,12 @@ const natureMeditate = () => {
           <View>
             <FlatList
               data={MEDITATION_DATA}
-              className="mb-20"
               keyExtractor={(item) => item.id.toString()}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <Pressable
                   onPress={() => console.log("tap")}
-                  className="h-48 my-3 rounded-md overflow-hidden"
+                  className="h-60 my-3 rounded-md overflow-hidden"
                 >
                   <ImageBackground
                     source={MEDITATION_IMAGES[item.id - 1]}
@@ -45,7 +44,7 @@ const natureMeditate = () => {
               )}
             />
           </View>
-        </SafeAreaView>
+        </View>
       </AppGradient>
     </View>
   );
