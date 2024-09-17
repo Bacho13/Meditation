@@ -25,7 +25,7 @@ const TabsLayout = () => {
             />
           ),
         }}
-      />
+      />           
       <Tabs.Screen
         name="affirmations"
         options={{
