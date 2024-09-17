@@ -9,7 +9,7 @@ const affirmations = () => {
     <View className="flex-1">
       <AppGradient colors={["#2e1f58", "#54426b", "#a790af"]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Text className="text-zinc-50 text-3xl font-bold">Change your belifes with affirmations</Text>
+          <Text className="text-zinc-50 mt-10 text-3xl font-bold">Change your belifes with affirmations</Text>
           <View>{AFFIRMATION_GALLERY.map((g)=>(
             <GuidedAffirmationsGallery key={g.title} title={g.title} previews={g.data} />
           ))}</View>
