@@ -1,11 +1,9 @@
 import { FlatList, View, Text, Pressable, ImageBackground } from "react-native";
-
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import AppGradient from "@/components/AppGradient";
 import { MEDITATION_DATA } from "@/constants/meditationData";
 import MEDITATION_IMAGES from "@/constants/meditationImages";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 const natureMeditate = () => {
   return (
     <View className="flex-1">
@@ -26,7 +24,7 @@ const natureMeditate = () => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <Pressable
-                  onPress={() => console.log("tap")}
+                  onPress={() => router.push(`/meditate/${item.id}`)}
                   className="h-60 my-3 rounded-md overflow-hidden"
                 >
                   <ImageBackground
@@ -34,7 +32,10 @@ const natureMeditate = () => {
                     resizeMode="cover"
                     className="flex-1 rounded-lg justify-center"
                   >
-                    <LinearGradient  colors={["transparent", "rgba(0,0,0,0.8)",]} className="flex-1 justify-center items-center">
+                    <LinearGradient
+                      colors={["transparent", "rgba(0,0,0,0.8)"]}
+                      className="flex-1 justify-center items-center"
+                    >
                       <Text className="text-green-100 text-3xl font-bold text-center">
                         {item.title}
                       </Text>
