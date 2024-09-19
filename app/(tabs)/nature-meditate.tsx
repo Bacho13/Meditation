@@ -10,10 +10,13 @@ const natureMeditate = () => {
       <AppGradient colors={["#161b2e", "#0a4d4a", "#766e67"]}>
         <View className="mb-6">
           <View className="mt-12">
-            <Text className="text-gray-200 mb-3 font-bold text-4xl text-left">
-              Welcome Bacho
+            <Text
+              className="text-gray-200 mb-3 font-bold text-4xl text-center
+            "
+            >
+              Welcome
             </Text>
-            <Text className="text-indigo-100  mb-5 text-xl font-medium">
+            <Text className="text-indigo-100  mb-5 text-xl font-medium text-center">
               Start your meditation practice today
             </Text>
           </View>

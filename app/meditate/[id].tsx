@@ -4,14 +4,15 @@ import AppGradient from "@/components/AppGradient";
 import { router, useLocalSearchParams } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Audio } from "expo-av";
 import { MEDITATION_DATA, AUDIO_FILES } from "@/constants/meditationData";
+import { TimerContext } from "@/context/TimerContext";
 
 const Meditate = () => {
   const { id } = useLocalSearchParams();
-
-  const [secondsRemaining, setSecondRmaining] = useState(10);
+  const { duration: secondsRemaining, setDuration } = useContext(TimerContext);
+  //const [secondsRemaining, setSecondRmaining] = useState(10);
   const [isMeditating, setMeditating] = useState(false);
   const [audioSound, setSound] = useState<Audio.Sound>();
   const [isPLayingAudio, setPlayingAudio] = useState(false);
@@ -26,7 +27,7 @@ const Meditate = () => {
     }
     if (isMeditating) {
       timerId = setTimeout(() => {
-        setSecondRmaining(secondsRemaining - 1);
+        setDuration(secondsRemaining - 1);
       }, 1000);
     }
 
@@ -36,7 +37,7 @@ const Meditate = () => {
   }, [secondsRemaining, isMeditating]);
 
   const toggleMeditatinSessionStatus = async () => {
-    if (secondsRemaining === 0) setSecondRmaining(10);
+    if (secondsRemaining === 0) setDuration(10);
 
     setMeditating(!isMeditating);
 
@@ -107,7 +108,7 @@ const Meditate = () => {
               onPress={handleAdjustDuration}
             />
             <CustomButton
-              title="Start Meditation"
+              title={isMeditating ? "Stop Meditation" : "Start Meditation "}
               onPress={toggleMeditatinSessionStatus}
               containerStyles="mt-4"
             />
