@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { Audio } from "expo-av";
 import { MEDITATION_DATA, AUDIO_FILES } from "@/constants/meditationData";
 
-
 const Meditate = () => {
   const { id } = useLocalSearchParams();
 
@@ -36,16 +35,14 @@ const Meditate = () => {
     };
   }, [secondsRemaining, isMeditating]);
 
-
-
   const toggleMeditatinSessionStatus = async () => {
-      if (secondsRemaining === 0) setSecondRmaining(10);
+    if (secondsRemaining === 0) setSecondRmaining(10);
 
-      setMeditating(!isMeditating);
+    setMeditating(!isMeditating);
 
-      await toggleSound();
-  }
-    
+    await toggleSound();
+  };
+
   const toggleSound = async () => {
     const sound = audioSound ? audioSound : await initializeSound();
 
@@ -54,24 +51,26 @@ const Meditate = () => {
     if (status?.isLoaded && !isPLayingAudio) {
       await sound.playAsync();
       setPlayingAudio(true);
-    }else{
+    } else {
       await sound.pauseAsync();
-    setPlayingAudio(false);
+      setPlayingAudio(false);
     }
+  };
 
-  }
+  const initializeSound = async () => {
+    const audioFileName = MEDITATION_DATA[Number(id) - 1].audio;
 
+    const { sound } = await Audio.Sound.createAsync(AUDIO_FILES[audioFileName]);
 
-  const initializeSound = async () =>{
-       const audioFileName = MEDITATION_DATA[Number(id) -1].audio;
+    setSound(sound);
+    return sound;
+  };
 
-       const {sound} = await Audio.Sound.createAsync(
-            AUDIO_FILES[audioFileName]
-       );
+  const handleAdjustDuration = () => {
+    if (isMeditating) toggleMeditatinSessionStatus();
 
-       setSound(sound);
-       return sound;
-  }
+    router.push("/(modal)/adjust-meditation-duration");
+  };
 
   // format the time left to ensure two digits are displayed
 
@@ -104,8 +103,13 @@ const Meditate = () => {
           </View>
           <View className="mb-5">
             <CustomButton
+              title="Adjust duration"
+              onPress={handleAdjustDuration}
+            />
+            <CustomButton
               title="Start Meditation"
               onPress={toggleMeditatinSessionStatus}
+              containerStyles="mt-4"
             />
           </View>
         </AppGradient>
